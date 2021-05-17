@@ -12,7 +12,6 @@ public class TwoStrings {
         for(int i =0; i<s2.length(); i++) {
             String key = String.valueOf(s2.charAt(i));
             if(map.containsKey(key)) {
-                System.out.println(key);
                 res = "YES"; break;
             }
         }
