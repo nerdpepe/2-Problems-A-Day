@@ -1,64 +1,64 @@
 import java.util.List;
 import java.util.ArrayList;
 
+// https://www.hackerrank.com/challenges/the-grid-search/problem
 public class TheGridSearch {
 
-    static boolean checkPlease(List<String> gridToFind, List<String> biggerGrid, int indexWhereFound, int lineInBigGridWhereFound) {
+    static boolean checkPlease(List<String> gridToFind, List<String> biggerGrid, int reqIndex,
+            int lineInBigGrid) {
         boolean checked = true;
-        int rowsInSmallGrid = gridToFind.size();
-
-        for(int i = 0 ; i<rowsInSmallGrid; i++) {
-            String whereToFind = biggerGrid.get(lineInBigGridWhereFound++);
-            int index = whereToFind.indexOf(gridToFind.get(i));
-            if(index!=indexWhereFound) {
+        for(int i=0,j=lineInBigGrid; i<gridToFind.size();i++,j++) {
+            String line = biggerGrid.get(j);
+            String toFind = gridToFind.get(i);
+            int index = line.indexOf(toFind,reqIndex);
+            if(index != reqIndex) {
                 checked = false;
                 break;
             }
         }
         return checked;
     }
-    static String gridSearch(List<String> G, List<String> P) {
-        boolean isSatisfied = false;
 
-        for(int i = 0; i <P.size() && !isSatisfied; i++) {
-            String toFind = P.get(i);
-            for(int j = 0; j<G.size(); j++) {
-                String line = G.get(j);
-                int indexOfFoundString = line.indexOf(toFind);
-               // System.out.println(line + " > " + indexOfFoundString);
-                if(indexOfFoundString >= 0) {
-                    isSatisfied = checkPlease(P, G, indexOfFoundString, j);
-                 //   System.out.println(isSatisfied);
-                }
-                if(isSatisfied) {
-                   // System.out.println("BREAK");
-                    break;
+    static String gridSearch(List<String> G, List<String> P) {
+        int index = 0;
+        String smallGridFirstLine = P.get(0);
+
+        List<String> ListOfIndex = new ArrayList<>();
+
+        for (int i = 0; i <= G.size() - P.size(); i++) {
+            while (index != -1) {
+                index = G.get(i).indexOf(smallGridFirstLine, index);
+                if (index != -1) {
+                    ListOfIndex.add(i + "," + index);
+                    index++;
                 }
             }
+            index = 0;
         }
-
-        if(!isSatisfied)
-            return "NO";
-        else
-            return "YES";
+        for (String item : ListOfIndex) {
+            String[] nums = item.split(",");
+            int lineNumber = Integer.valueOf(nums[0]);
+            int indexInLine = Integer.valueOf(nums[1]);
+            boolean found = checkPlease(P, G, indexInLine, lineNumber);
+            if(found)
+                return "YES";
+        }
+        return "NO";
     }
-    
-    public static void main(String ...arg) {
-        //Bigger Grid
-        List<String> G = new ArrayList<>();
-        G.add("8988242643");
-        G.add("3830589324");
-        G.add("2229505813");
-        G.add("5633845374");
-        G.add("6473530293");
-        G.add("7053106601");
-        //Smaller Grid - to find in Bigger Grid G
-        List<String> P = new ArrayList<>();
-        P.add("9505");
-        P.add("3845");
-        P.add("3530");
 
-        String ans = gridSearch(G,P);
+    public static void main(String... arg) {
+        // Bigger Grid
+        List<String> G = new ArrayList<>();
+        G.add("999999");
+        G.add("121211");
+       // G.add("123634");
+       // G.add("781288");
+        // Smaller Grid - to find in Bigger Grid G
+        List<String> P = new ArrayList<>();
+        P.add("99");
+        P.add("11");
+
+        String ans = gridSearch(G, P);
         System.out.println(ans);
 
     }
