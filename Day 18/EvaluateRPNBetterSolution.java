@@ -1,6 +1,6 @@
 import java.util.Stack;
 
-public class EvaluateReversePolishNotation {
+public class EvaluateRPNBetterSolution {
 
     static int evalRPN(String[] tokens) {
         
