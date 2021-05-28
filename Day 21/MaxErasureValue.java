@@ -1,5 +1,6 @@
 import java.util.HashMap;
 
+// https://leetcode.com/problems/maximum-erasure-value/
 public class MaxErasureValue {
     static int maximumUniqueSubarray(int[] nums) {
         int maxSum = 0;
