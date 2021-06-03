@@ -2,42 +2,22 @@ import java.util.Arrays;
 
 public class MaxAreaOfPieceOfCake {
     static int maxArea(int h, int w, int[] horizontalCuts, int[] verticalCuts) {
-        int ans = 0;
 
         Arrays.sort(horizontalCuts);
         int h_n = horizontalCuts.length;
-        int h_max = 0;
+        int h_max = Math.max(horizontalCuts[0], h - horizontalCuts[h_n - 1]);
 
-        if(horizontalCuts[0] - h_max > h - horizontalCuts[h_n-1])
-            h_max = horizontalCuts[0] - h_max;
-        else
-            h_max = h - horizontalCuts[h_n-1];
-        
         Arrays.sort(verticalCuts);
         int v_n = verticalCuts.length;
-        int v_max = 0;
+        int v_max = Math.max(verticalCuts[0], w - verticalCuts[v_n - 1]);
 
-        if(verticalCuts[0] - v_max > w - verticalCuts[v_n-1])
-            v_max = verticalCuts[0] - v_max;
-        else
-            v_max = w - verticalCuts[v_n-1];
+        for (int i = 1; i < h_n; i++)
+            h_max = Math.max(h_max, horizontalCuts[i] - horizontalCuts[i - 1]);
 
-        if(h_n > 1) {
-            for(int i = 1; i<h_n; i++) {
-                if(horizontalCuts[i] - horizontalCuts[i-1] > h_max)
-                    h_max = horizontalCuts[i] - horizontalCuts[i-1];
-            }
-        }
+        for (int i = 1; i < v_n; i++)
+            v_max = Math.max(v_max, verticalCuts[i] - verticalCuts[i - 1]);
 
-        if(v_n > 1) {
-            for(int i = 1; i < v_n; i++) {
-                if(verticalCuts[i] - verticalCuts[i-1] > v_max)
-                    v_max = verticalCuts[i] - verticalCuts[i-1];
-            }
-
-        }
-        ans = (int)((long)h_max * v_max % 1000000007);
-        return ans;
+        return (int) ((long) h_max * v_max % 1000000007);
     }
 
     public static void main(String... arg) {
