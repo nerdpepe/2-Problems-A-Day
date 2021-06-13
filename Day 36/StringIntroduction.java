@@ -1,5 +1,6 @@
-public class StringIntroduction {
+import java.util.Scanner;
 
+public class StringIntroduction {
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
         String A=sc.next();
@@ -12,5 +13,6 @@ public class StringIntroduction {
         ch1[0] = Character.toUpperCase(ch1[0]);
         ch2[0] = Character.toUpperCase(ch2[0]);
         System.out.print(new String(ch1) + " " + new String(ch2));
+        sc.close();
     }
 }
