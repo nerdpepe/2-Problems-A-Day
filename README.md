@@ -23,4 +23,10 @@ I am now going back to the basics because in order to tackle questions that need
 - I am trying to maintain consistency first.
 - I am also learning Flutter which is also going on nicely.
 
-See ya! 👋
+---
+
+🙌🏻 I am not stopping at all, I continue doing at least one question everyday and update in my other repo : 
+> [1-Question-on-LeetCode-Everyday](https://github.com/nerdpepe/1-Question-on-LeetCode-Everyday)
+
+
+See ya there ! 👋
